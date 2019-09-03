@@ -13,7 +13,7 @@ public class ExecutorFactory {
         if (ExecutorType.SIMPLE.equals(key)) {
             return new SimpleExecutor(configuration);
         }
-        if (ExecutorType.SIMPLE.equals(key)) {
+        if (ExecutorType.CACHING.equals(key)) {
             return new CachingExecutor(new SimpleExecutor(configuration));
         }
         throw new RuntimeException("no executor found");
