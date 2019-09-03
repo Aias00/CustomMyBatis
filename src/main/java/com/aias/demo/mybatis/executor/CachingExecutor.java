@@ -26,6 +26,8 @@ public class CachingExecutor implements Executor {
         if (null == result) {
             result = delegate.execute(mapperData, parameter);
             localCache.put(mapperData.getSql(), result);
+        } else {
+            System.out.println("缓存命中:" + mapperData.getSql());
         }
         return (T) result;
     }
