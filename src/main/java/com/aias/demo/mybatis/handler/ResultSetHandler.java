@@ -24,9 +24,8 @@ public class ResultSetHandler {
             Object resultObj = new DefaultObjectFactory().create(mapperData.getType());
             ResultSet rs = preparedStatement.getResultSet();
             if (rs.next()) {
-                int i = 0;
                 for (Field field : resultObj.getClass().getDeclaredFields()) {
-                    setValue(resultObj, field, rs, i);
+                    setValue(resultObj, field, rs);
                 }
             }
             return resultObj;
@@ -36,7 +35,7 @@ public class ResultSetHandler {
         return null;
     }
 
-    private void setValue(Object resultObj, Field field, ResultSet rs, int i) throws Exception {
+    private void setValue(Object resultObj, Field field, ResultSet rs) throws Exception {
         Method setMethod = resultObj.getClass().getMethod("set" + upperCapital(field.getName()), field.getType());
         setMethod.invoke(resultObj, getResult(field, rs));
     }
